@@ -1,66 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MikroTik RADIUS Management Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Laravel-based web application for managing MikroTik RADIUS authentication and accounting. The application provides a web interface to manage NAS (Network Access Server) devices and RADIUS user authentication.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **NAS Management**: Manage Network Access Server devices with details like IP addresses, secrets, and descriptions
+- **RADIUS User Management**: Handle user authentication through RADIUS protocol
+- **User Groups**: Manage user groups and their permissions
+- **Modern UI**: Clean and responsive web interface using Bootstrap/Tailwind CSS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Database Schema
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The application uses the following main tables:
+- `nas` - Network Access Server devices
+- `radcheck` - User authentication checks
+- `radreply` - User authentication replies
+- `radusergroup` - User group assignments
+- `radgroupcheck` - Group-based authentication checks
+- `radgroupreply` - Group-based authentication replies
+- `radacct` - RADIUS accounting records
+- `radpostauth` - Post-authentication logging
 
-## Learning Laravel
+## Installation & Setup
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prerequisites
+- PHP 8.2 or higher
+- Composer
+- Node.js and npm
+- SQLite (default) or MySQL/PostgreSQL
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Installation Steps
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
 
-## Laravel Sponsors
+2. **Install Node.js dependencies**
+   ```bash
+   npm install
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. **Environment setup**
+   ```bash
+   php artisan key:generate
+   ```
 
-### Premium Partners
+4. **Database setup**
+   ```bash
+   php artisan migrate
+   php artisan storage:link
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+5. **Build frontend assets**
+   ```bash
+   npm run build
+   ```
 
-## Contributing
+6. **Start the development server**
+   ```bash
+   php artisan serve
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+The application will be available at `http://127.0.0.1:8000`
 
-## Code of Conduct
+## Usage
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Accessing the Application
+- **Home Page**: `http://127.0.0.1:8000/` - Welcome page
+- **NAS Management**: `http://127.0.0.1:8000/nas` - View and manage NAS devices
 
-## Security Vulnerabilities
+## Development
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Running in Development Mode
+```bash
+# Start the Laravel server
+php artisan serve
+
+# In another terminal, start the frontend development server
+npm run dev
+```
+
+### Optimization for Production
+```bash
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan optimize
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Storage Link Error**: Run `php artisan storage:link`
+2. **Permission Issues**: Ensure `storage/` and `bootstrap/cache/` are writable
+3. **Database Issues**: Check your `.env` file database configuration
+4. **Asset Issues**: Run `npm run build` to compile frontend assets
+
+### Clearing Caches
+```bash
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+php artisan cache:clear
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
