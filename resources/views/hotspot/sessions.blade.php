@@ -5,6 +5,7 @@
 @section('page_subtitle', 'Monitor active hotspot sessions and user connections')
 
 @section('content')
+@verbatim
 <div x-data="hotspotSessions({
     sessions: @json($sessions),
     stats: @json($stats),
