@@ -409,6 +409,7 @@
         </template>
     </div>
 </div>
+@endverbatim
 @endsection
 
 @push('scripts')
